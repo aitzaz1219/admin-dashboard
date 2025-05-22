@@ -26,21 +26,21 @@ export default function ReviewsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">User Reviews</h1>
-      <ul className="space-y-4">
+      <h1 className="text-2xl font-bold mb-6">Customer Reviews</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {reviews.map((review) => (
-          <li key={review.id} className="border rounded bg-white p-4 shadow-sm">
-            <div className="flex justify-between items-center">
+          <div key={review.id} className="bg-white rounded-xl shadow p-5 border space-y-2">
+            <div className="flex justify-between items-start">
               <div>
-                <p className="font-semibold">{review.user}</p>
-                <p className="text-sm text-gray-600">Rating: {review.rating} ★</p>
-                <p className="mt-1">{review.message}</p>
+                <p className="text-lg font-medium">{review.user}</p>
+                <p className="text-sm text-gray-600 mt-1">Rating: <span className="font-semibold">{review.rating} ★</span></p>
               </div>
-              <button onClick={() => deleteReview(review.id)} className="text-red-600 hover:underline">Delete</button>
+              <button onClick={() => deleteReview(review.id)} className="text-red-500 text-sm hover:underline">Delete</button>
             </div>
-          </li>
+            <p className="text-gray-700">{review.message}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

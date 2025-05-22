@@ -29,32 +29,31 @@ export default function BookingsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Bookings</h1>
-      <table className="w-full table-auto border">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="p-2 border">Service</th>
-            <th className="p-2 border">Customer</th>
-            <th className="p-2 border">Tradesperson</th>
-            <th className="p-2 border">Status</th>
-            <th className="p-2 border">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookings.map((booking) => (
-            <tr key={booking.id} className="text-center">
-              <td className="p-2 border">{booking.service}</td>
-              <td className="p-2 border">{booking.customer}</td>
-              <td className="p-2 border">{booking.tradesperson}</td>
-              <td className="p-2 border capitalize">{booking.status}</td>
-              <td className="p-2 border space-x-2">
-                <button onClick={() => updateStatus(booking.id, 'in-progress')} className="px-2 py-1 bg-blue-600 text-white rounded">In Progress</button>
-                <button onClick={() => updateStatus(booking.id, 'completed')} className="px-2 py-1 bg-green-600 text-white rounded">Complete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <h1 className="text-2xl font-bold mb-6">Manage Bookings</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {bookings.map((booking) => (
+          <div key={booking.id} className="bg-white p-4 rounded-xl shadow border">
+            <h2 className="font-semibold text-lg mb-1">{booking.service}</h2>
+            <p className="text-sm text-gray-600">Customer: {booking.customer}</p>
+            <p className="text-sm text-gray-600">Tradesperson: {booking.tradesperson}</p>
+            <p className="text-xs text-blue-600 mt-1 capitalize">Status: {booking.status}</p>
+            <div className="mt-4 space-x-2">
+              <button
+                onClick={() => updateStatus(booking.id, 'in-progress')}
+                className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded"
+              >
+                In Progress
+              </button>
+              <button
+                onClick={() => updateStatus(booking.id, 'completed')}
+                className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded"
+              >
+                Complete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

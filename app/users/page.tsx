@@ -29,44 +29,31 @@ export default function UsersPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Users</h1>
-      <table className="w-full table-auto border">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="p-2 border">Name</th>
-            <th className="p-2 border">Email</th>
-            <th className="p-2 border">Role</th>
-            <th className="p-2 border">Status</th>
-            <th className="p-2 border">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id} className="text-center">
-              <td className="p-2 border">{user.name}</td>
-              <td className="p-2 border">{user.email}</td>
-              <td className="p-2 border capitalize">{user.role}</td>
-              <td className="p-2 border">
-                {user.isVerified ? (
-                  <span className="text-green-600 font-semibold">Approved</span>
-                ) : (
-                  <span className="text-red-600 font-semibold">Pending</span>
-                )}
-              </td>
-              <td className="p-2 border">
-                <button
-                  className={`px-3 py-1 rounded text-white ${
-                    user.isVerified ? 'bg-red-600' : 'bg-green-600'
-                  }`}
-                  onClick={() => toggleVerify(user.id)}
-                >
-                  {user.isVerified ? 'Reject' : 'Approve'}
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <h1 className="text-2xl font-bold mb-6">Manage Users</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {users.map(user => (
+          <div key={user.id} className="bg-white rounded-xl shadow p-4 border">
+            <div className="mb-2">
+              <h2 className="text-lg font-semibold">{user.name}</h2>
+              <p className="text-sm text-gray-500">{user.email}</p>
+              <p className="text-xs text-gray-400 capitalize">{user.role}</p>
+            </div>
+            <div className="flex justify-between items-center mt-4">
+              <span className={`text-sm font-medium ${user.isVerified ? 'text-green-600' : 'text-red-500'}`}>
+                {user.isVerified ? 'Approved' : 'Pending'}
+              </span>
+              <button
+                onClick={() => toggleVerify(user.id)}
+                className={`px-3 py-1 text-sm rounded text-white ${
+                  user.isVerified ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'
+                }`}
+              >
+                {user.isVerified ? 'Reject' : 'Approve'}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

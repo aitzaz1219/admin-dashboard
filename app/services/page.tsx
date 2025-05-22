@@ -35,24 +35,34 @@ export default function ServicesPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Service Categories</h1>
-      <div className="flex mb-4">
+      <h1 className="text-2xl font-bold mb-6">Service Categories</h1>
+      <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <input
-          className="p-2 border w-full"
+          className="p-3 border border-gray-300 rounded w-full sm:w-2/3"
           value={newService}
           onChange={(e) => setNewService(e.target.value)}
           placeholder="Enter new service"
         />
-        <button onClick={addService} className="ml-2 px-4 py-2 bg-blue-600 text-white rounded">Add</button>
+        <button
+          onClick={addService}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded w-full sm:w-auto"
+        >
+          Add Service
+        </button>
       </div>
-      <ul className="space-y-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {services.map(service => (
-          <li key={service.id} className="flex justify-between border p-2 rounded bg-white">
-            <span>{service.name}</span>
-            <button onClick={() => deleteService(service.id)} className="text-sm text-red-600 hover:underline">Delete</button>
-          </li>
+          <div key={service.id} className="bg-white p-4 rounded-xl shadow border flex justify-between items-center">
+            <span className="font-medium">{service.name}</span>
+            <button
+              onClick={() => deleteService(service.id)}
+              className="text-sm text-red-600 hover:underline"
+            >
+              Delete
+            </button>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
